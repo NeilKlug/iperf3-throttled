@@ -1,0 +1,14 @@
+services:
+  test:
+    build: ./
+    container_name: "iperf3"
+    ports:
+      - 50001:5001/tcp
+      - 50001:5001/udp
+    networks:
+      - public
+    dns_search: .
+    command: iperf3 -s -V -d -p 5001
+networks:
+  public:
+    driver: bridge
