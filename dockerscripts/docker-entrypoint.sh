@@ -7,4 +7,10 @@ if [ "${1}" != "iperf3" ]; then
 	fi
 fi
 
+# Limit incoming network to 200 mbps
+tc qdisc add dev eth0 handle ffff: ingress
+tc filter add dev eth0 parent ffff: protocol ip prio 50 u32 match ip src 0.0.0.0/0 police rate 200mbit burst 4m drop flowid :1
+# limit outgoing network to 5 mbps
+tc qdisc add dev eth0 root tbf rate 5mbit latency 50ms burst 10k
+
 exec "$@"

@@ -8,6 +8,8 @@ services:
     networks:
       - public
     dns_search: .
+    cap_add:
+      - NET_ADMIN
 networks:
   public:
     driver: bridge

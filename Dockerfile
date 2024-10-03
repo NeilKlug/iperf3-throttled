@@ -4,7 +4,8 @@ RUN apk add --no-cache iperf3 && \
     apk add --no-cache iproute2
 EXPOSE 22 5001
 RUN ip a
-RUN which iperf3
+RUN which iperf3 && \
+    which tc
 COPY ./dockerscripts/docker-entrypoint.sh /
 RUN chmod +x /docker-entrypoint.sh
 ENTRYPOINT ["dumb-init", "/docker-entrypoint.sh"]
