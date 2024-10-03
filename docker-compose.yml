@@ -8,7 +8,6 @@ services:
     networks:
       - public
     dns_search: .
-    command: iperf3 -s -V -d -p 5001
 networks:
   public:
     driver: bridge
